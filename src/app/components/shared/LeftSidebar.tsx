@@ -5,8 +5,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { sidebarLinks } from "@/constants";
+import { signOut, useSession } from "next-auth/react";
 
 const LeftSidebar = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -57,11 +59,21 @@ const LeftSidebar = () => {
             </div>
           </SignOutButton>
         </SignedIn> */}
-        <div className="flex cursor-pointer gap-4 p-4">
-          <Image src="/assets/logout.svg" alt="logout" width={24} height={24} />
+        {session?.user && (
+          <div
+            onClick={() => signOut()}
+            className="flex cursor-pointer gap-4 p-4"
+          >
+            <Image
+              src="/assets/logout.svg"
+              alt="logout"
+              width={24}
+              height={24}
+            />
 
-          <p className="text-light-2 max-lg:hidden">Logout</p>
-        </div>
+            <p className="text-light-2 max-lg:hidden">Logout</p>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,10 +1,15 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  const { data: session } = useSession();
-  console.log(session);
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/sign-in?callbackUrl=/");
+    },
+  });
   return (
     <>
       <h1 className="head-text text-left">Home</h1>

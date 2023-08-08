@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import Searchbar from "./Searchbar";
+// import Searchbar from "./Searchbar";
 function Topbar() {
   return (
     <nav className="topbar">
