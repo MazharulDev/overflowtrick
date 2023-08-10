@@ -23,13 +23,15 @@ const CreatePost = () => {
   return (
     <div>
       <div className="flex justify-start items-start gap-4">
-        <Image
-          className="rounded-full col-span-1"
-          src={session?.user?.image as string}
-          width={50}
-          height={50}
-          alt="profile pic"
-        />
+        {session?.user && (
+          <Image
+            className="rounded-full col-span-1"
+            src={session?.user?.image as string}
+            width={50}
+            height={50}
+            alt="profile pic"
+          />
+        )}
         <textarea
           ref={textAreaRef}
           value={val}
@@ -40,9 +42,18 @@ const CreatePost = () => {
         ></textarea>
       </div>
       <div className="mt-5 flex justify-end">
-        <button className="text-white bg-blue px-3 py-2 rounded-lg">
-          Post
-        </button>
+        {val.length > 2 ? (
+          <button className="text-white bg-blue px-3 py-2 rounded-lg">
+            Post
+          </button>
+        ) : (
+          <button
+            disabled
+            className="text-white bg-sky-950 px-3 py-2 rounded-lg"
+          >
+            Post
+          </button>
+        )}
       </div>
     </div>
   );

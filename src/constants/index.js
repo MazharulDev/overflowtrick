@@ -4,16 +4,16 @@ export const sidebarLinks = [
     route: "/",
     label: "Home",
   },
-  // {
-  //   imgURL: "/assets/search.svg",
-  //   route: "/search",
-  //   label: "Search",
-  // },
-  // {
-  //   imgURL: "/assets/activity.svg",
-  //   route: "/activity",
-  //   label: "Activity",
-  // },
+  {
+    imgURL: "/assets/search.svg",
+    route: "/search",
+    label: "Search",
+  },
+  {
+    imgURL: "/assets/activity.svg",
+    route: "/notification",
+    label: "Notification",
+  },
   // {
   //   imgURL: "/assets/create.svg",
   //   route: "/create-thread",
