@@ -1,3 +1,4 @@
+import { ReduxProviders } from "@/redux/provider";
 import Providers from "../components/Providers/Providers";
 import "../globals.css";
 
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <ReduxProviders>
+          <Providers>{children}</Providers>
+        </ReduxProviders>
       </body>
     </html>
   );
