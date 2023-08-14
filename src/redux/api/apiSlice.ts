@@ -18,7 +18,11 @@ export const api = createApi({
     getUser: builder.query({
       query: () => "/users",
     }),
+    getSingleUser: builder.query({
+      query: (email) => `/users/${email}`,
+    }),
   }),
 });
 
-export const { usePostUserMutation, useGetUserQuery } = api;
+export const { usePostUserMutation, useGetUserQuery, useGetSingleUserQuery } =
+  api;

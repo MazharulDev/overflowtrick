@@ -1,10 +1,12 @@
 "use client";
+import { useGetSingleUserQuery } from "@/redux/api/apiSlice";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { LiaUserEditSolid } from "react-icons/lia";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
+  const { data: user } = useGetSingleUserQuery(session?.user?.email);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -18,7 +20,7 @@ const ProfilePage = () => {
           />
           <div className="text-white">
             <h2 className="text-heading3-bold">{session?.user?.name}</h2>
-            <p>@MazharulDev</p>
+            <p>@{user?.data?.username}</p>
           </div>
         </div>
         <div className="text-white flex justify-center items-center gap-2 font-bold px-3 py-2 bg-dark-3 hover:bg-dark-2 cursor-pointer rounded-lg duration-100">

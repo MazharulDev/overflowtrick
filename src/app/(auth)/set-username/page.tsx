@@ -1,5 +1,8 @@
 "use client";
-import { usePostUserMutation } from "@/redux/api/apiSlice";
+import {
+  useGetSingleUserQuery,
+  usePostUserMutation,
+} from "@/redux/api/apiSlice";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -17,6 +20,7 @@ const SetUsernamePage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+  const { data: user } = useGetSingleUserQuery(session?.user?.email);
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     const options = {
       data: {
