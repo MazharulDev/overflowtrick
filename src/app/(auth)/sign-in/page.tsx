@@ -25,7 +25,7 @@ const SignInPage = () => {
           <div
             onClick={() =>
               signIn("google", {
-                callbackUrl: "http://localhost:3000/set-username",
+                callbackUrl: "http://localhost:3000",
               })
             }
             className="mt-10 flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100 "
