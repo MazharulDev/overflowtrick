@@ -1,8 +1,18 @@
+import { useCreatePostMutation } from "@/redux/post/postApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+
+interface iPost {
+  post: string;
+  userName: string;
+  email: string;
+  image: string;
+}
 
 const CreatePost = () => {
+  const [createPost] = useCreatePostMutation();
   const { data: session } = useSession();
   const [val, setVal] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -19,6 +29,32 @@ const CreatePost = () => {
 
   const onChange = (e: any) => {
     setVal(e.target.value);
+  };
+  const postData = {
+    data: {
+      post: val,
+      userName: session?.user?.name,
+      email: session?.user?.email,
+      image: session?.user?.image,
+    },
+  };
+  const handleSubmit = () => {
+    createPost(postData);
+    toast.success("Post is submitted");
+    setVal("");
+    // if (val) {
+    //   fetch("http://localhost:5000/api/v1/posts/create-post", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(postData),
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // }
   };
   return (
     <div>
@@ -43,7 +79,10 @@ const CreatePost = () => {
       </div>
       <div className="mt-5 flex justify-end">
         {val.length > 2 ? (
-          <button className="text-white bg-blue px-3 py-2 rounded-lg">
+          <button
+            onClick={handleSubmit}
+            className="text-white bg-blue px-3 py-2 rounded-lg"
+          >
             Post
           </button>
         ) : (

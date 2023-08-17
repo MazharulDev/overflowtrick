@@ -6,23 +6,6 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api/v1",
   }),
-  tagTypes: ["user"],
-  endpoints: (builder) => ({
-    postUser: builder.mutation({
-      query: ({ data }) => ({
-        url: `/users/create-user`,
-        method: "POST",
-        body: data,
-      }),
-    }),
-    getUser: builder.query({
-      query: () => "/users",
-    }),
-    getSingleUser: builder.query({
-      query: (email) => `/users/${email}`,
-    }),
-  }),
+  // tagTypes: ["user"],
+  endpoints: () => ({}),
 });
-
-export const { usePostUserMutation, useGetUserQuery, useGetSingleUserQuery } =
-  api;
