@@ -1,18 +1,17 @@
 import { IPost } from "@/interfaces/post";
-import { useGetAllPostQuery } from "@/redux/post/postApi";
 import Image from "next/image";
 import { AiOutlineComment } from "react-icons/ai";
 import { BiLike } from "react-icons/bi";
 import { RiShareForward2Fill } from "react-icons/ri";
 
-const PostCard = () => {
-  const { data } = useGetAllPostQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    pollingInterval: 30000,
-  });
+interface IProps {
+  data: IPost[];
+}
+
+const PostCard = ({ data }: IProps) => {
   return (
     <div className="text-white">
-      {data?.data?.map((postData: IPost) => (
+      {data?.map((postData: IPost) => (
         <div key={postData.id} className="mb-5">
           <div className="flex justify-start items-start gap-5">
             <Image

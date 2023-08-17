@@ -29,7 +29,9 @@ const LeftSidebar = () => {
             <Link
               href={link.route}
               key={link.label}
-              className={`leftsidebar_link ${isActive && "bg-blue font-bold"}`}
+              className={`leftsidebar_link hover:bg-slate-800 hover:rounded-2xl duration-150 ${
+                isActive && "font-bold text-body-medium scale-100"
+              }`}
             >
               <Image
                 src={link.imgURL}
@@ -62,7 +64,7 @@ const LeftSidebar = () => {
         {session?.user && (
           <div
             onClick={() => signOut()}
-            className="flex cursor-pointer gap-4 p-4"
+            className="flex cursor-pointer gap-4 p-4 hover:bg-slate-800 hover:rounded-2xl duration-150"
           >
             <Image
               src="/assets/logout.svg"

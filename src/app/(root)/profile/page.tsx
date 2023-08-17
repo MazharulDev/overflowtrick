@@ -1,11 +1,13 @@
 "use client";
+import PostCard from "@/app/components/card/PostCard";
+import { useGetPostByEmailQuery } from "@/redux/post/postApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { LiaUserEditSolid } from "react-icons/lia";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
-  // const { data: user } = useGetSingleUserQuery(session?.user?.email);
+  const { data: post } = useGetPostByEmailQuery(session?.user?.email);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -33,7 +35,10 @@ const ProfilePage = () => {
       </div>
       {/* <p className="text-white mt-8">Mern stack Developer</p> */}
       <p className="border border-slate-800 mt-12"></p>
-      <h3 className="text-white text-heading3-bold mt-5">Recent Post</h3>
+      <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
+      <div className="mt-5">
+        <PostCard data={post?.data} />
+      </div>
     </div>
   );
 };
