@@ -74,7 +74,7 @@ const CreatePost = () => {
           onChange={onChange}
           rows={1}
           className="outline-none bg-dark-1 text-white col-span-4 w-full mt-5 resize-none"
-          placeholder="What is happening?!"
+          placeholder={`What's on your mind, ${session?.user?.name}?`}
         ></textarea>
       </div>
       <div className="mt-5 flex justify-end">

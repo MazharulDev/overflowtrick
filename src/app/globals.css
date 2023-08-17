@@ -59,7 +59,7 @@
   }
 
   .topbar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-1 px-6 py-3 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-slate-800;
+    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-dark-1 px-6 py-3 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-slate-800 h-20;
   }
 
   .bottombar {
@@ -159,3 +159,26 @@
 .comment-form_btn {
   @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
 }
+
+/* scrollbar custom  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px wheat;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+/*::-webkit-scrollbar-thumb:hover {
+  background: black;
+} */

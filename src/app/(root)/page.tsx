@@ -1,6 +1,7 @@
 "use client";
 
 import CreatePost from "../components/card/CreatePost";
+import PostCard from "../components/card/PostCard";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
         <CreatePost />
       </div>
       <p className="border border-slate-900 mt-8"></p>
+      <div className="mt-5">
+        <PostCard />
+      </div>
     </>
   );
 }
