@@ -3,8 +3,26 @@
 import { useGetAllPostQuery } from "@/redux/post/postApi";
 import CreatePost from "../components/card/CreatePost";
 import PostCard from "../components/card/PostCard";
+// import { useSession } from "next-auth/react";
+// import { useGetSingleUserQuery } from "@/redux/user/userApi";
+// import { redirect } from "next/navigation";
 
 export default function Home() {
+  // const { data: session } = useSession();
+  // const {
+  //   data: userByEmail,
+  //   isLoading,
+  //   isFetching,
+  // } = useGetSingleUserQuery(session?.user?.email);
+  // if (isLoading || isFetching) {
+  //   return <p>Loading...</p>;
+  // } else {
+  //   if (session?.user?.email) {
+  //     if (!userByEmail?.data?.username) {
+  //       redirect("/set-username");
+  //     }
+  //   }
+  // }
   const { data } = useGetAllPostQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,

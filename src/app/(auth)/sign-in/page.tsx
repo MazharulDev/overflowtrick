@@ -2,9 +2,27 @@
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useGetSingleUserQuery } from "@/redux/user/userApi";
+import { redirect } from "next/navigation";
 
 const SignInPage = () => {
+  const { data: session } = useSession();
+  const { data, isLoading, isFetching } = useGetSingleUserQuery(
+    session?.user?.email
+  );
+  if (isLoading || isFetching) {
+    return <p>Loading...</p>;
+  } else {
+    if (session?.user?.email) {
+      if (data?.data?.username) {
+        redirect("/");
+      } else {
+        redirect("/set-username");
+      }
+    }
+  }
+
   return (
     <div className="bg-dark-1 h-screen flex justify-center items-center text-white">
       <div className="bg-dark-4 w-[30rem] h-[30rem] rounded-3xl">
@@ -25,7 +43,7 @@ const SignInPage = () => {
           <div
             onClick={() =>
               signIn("google", {
-                callbackUrl: "http://localhost:3000",
+                // callbackUrl: "http://localhost:3000",
               })
             }
             className="mt-10 flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100 "
