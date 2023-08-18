@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-// import Searchbar from "./Searchbar";
+import Searchbar from "./Searchbar";
 function Topbar() {
   return (
     <nav className="topbar">
@@ -11,9 +11,9 @@ function Topbar() {
           Overflowtrick
         </p> */}
       </Link>
-      {/* <div className="mx-4 md:ml-0 hidden md:block">
+      <div className="mx-4 md:ml-0 hidden md:block">
         <Searchbar />
-      </div> */}
+      </div>
       <div className="flex items-center gap-1">
         <div className="block md:hidden">
           {/* <SignedIn>

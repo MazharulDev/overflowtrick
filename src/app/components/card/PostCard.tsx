@@ -12,7 +12,7 @@ const PostCard = ({ data }: IProps) => {
   return (
     <div className="text-white">
       {data?.map((postData: IPost) => (
-        <div key={postData.id} className="mb-5">
+        <div key={postData.id} className="mb-5 bg-slate-950 p-5 rounded-2xl">
           <div className="flex justify-start items-start gap-5">
             <Image
               className="rounded-full"
@@ -32,7 +32,7 @@ const PostCard = ({ data }: IProps) => {
             </div>
           </div>
 
-          <p className="border border-slate-800 mt-4"></p>
+          {/* <p className="border border-slate-800 mt-4"></p> */}
         </div>
       ))}
     </div>

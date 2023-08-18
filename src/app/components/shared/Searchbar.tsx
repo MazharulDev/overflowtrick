@@ -13,7 +13,7 @@ const Searchbar = () => {
       <input
         id="text"
         placeholder="Search people"
-        className="flex h-10 w-full rounded-md px-3 py-2 text-sm bg-dark-3 outline-none "
+        className="flex h-10 w-full rounded-md px-3 py-2 text-sm bg-dark-3 outline-none text-white"
       />
     </div>
   );
