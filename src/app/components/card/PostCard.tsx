@@ -22,7 +22,10 @@ const PostCard = ({ data }: IProps) => {
               alt="profile pic"
             />
             <div className="text-white">
-              <h2 className="text-small-medium">{postData?.userName}</h2>
+              <div className="flex justify-start items-center gap-2">
+                <h2 className="text-small-medium">{postData?.name}</h2>
+                <p className="text-slate-600">@{postData?.username}</p>
+              </div>
               <p className="mt-3">{postData?.post}</p>
               <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
                 <BiLike />

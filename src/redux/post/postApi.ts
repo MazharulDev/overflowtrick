@@ -14,8 +14,8 @@ const postApi = api.injectEndpoints({
       query: () => "/posts",
       providesTags: ["post"],
     }),
-    getPostByEmail: builder.query({
-      query: (email) => `/posts/${email}`,
+    getPostByUsername: builder.query({
+      query: (username) => `/posts/${username}`,
       // providesTags: ["post"],
     }),
   }),
@@ -24,5 +24,5 @@ const postApi = api.injectEndpoints({
 export const {
   useCreatePostMutation,
   useGetAllPostQuery,
-  useGetPostByEmailQuery,
+  useGetPostByUsernameQuery,
 } = postApi;

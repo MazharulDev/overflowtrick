@@ -1,4 +1,5 @@
 import { useCreatePostMutation } from "@/redux/post/postApi";
+import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -6,14 +7,20 @@ import { toast } from "react-hot-toast";
 
 interface iPost {
   post: string;
-  userName: string;
-  email: string;
+  name: string;
+  username: string;
   image: string;
 }
 
 const CreatePost = () => {
   const [createPost] = useCreatePostMutation();
   const { data: session } = useSession();
+  const { data, isLoading, isFetching } = useGetSingleUserQuery(
+    session?.user?.email
+  );
+  if (isLoading || isFetching) {
+    return <p className="text-white text-heading3-bold">Loading...</p>;
+  }
   const [val, setVal] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -33,8 +40,8 @@ const CreatePost = () => {
   const postData = {
     data: {
       post: val,
-      userName: session?.user?.name,
-      email: session?.user?.email,
+      name: session?.user?.name,
+      username: data?.data?.username,
       image: session?.user?.image,
     },
   };
