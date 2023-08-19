@@ -1,3 +1,4 @@
+"use client";
 import { api } from "../api/apiSlice";
 
 const userApi = api.injectEndpoints({
@@ -15,8 +16,15 @@ const userApi = api.injectEndpoints({
     getSingleUser: builder.query({
       query: (email) => `/users/${email}`,
     }),
+    getUserByUsername: builder.query({
+      query: (username) => `/users/username/${username}`,
+    }),
   }),
 });
 
-export const { usePostUserMutation, useGetUserQuery, useGetSingleUserQuery } =
-  userApi;
+export const {
+  usePostUserMutation,
+  useGetUserQuery,
+  useGetSingleUserQuery,
+  useGetUserByUsernameQuery,
+} = userApi;
