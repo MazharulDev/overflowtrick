@@ -23,7 +23,7 @@ const AllPost = () => {
               <div className="flex justify-start items-start gap-5">
                 <Image
                   className="rounded-full"
-                  src={postData?.image as string}
+                  src={postData?.author?.image}
                   width={30}
                   height={30}
                   alt="profile pic"
@@ -31,14 +31,16 @@ const AllPost = () => {
                 <div className="text-white">
                   <div className="flex justify-start items-center gap-2">
                     <Link
-                      href={`/profile/${postData?.username}`}
+                      href={`/profile/${postData?.author?.username}`}
                       className="text-small-medium cursor-pointer hover:underline"
                     >
-                      {postData?.name}
+                      {postData?.author?.name}
                     </Link>
-                    <p className="text-slate-600">@{postData?.username}</p>
+                    <p className="text-slate-600">
+                      @{postData?.author?.username}
+                    </p>
                   </div>
-                  <p className="mt-3">{postData?.post}</p>
+                  <p className="mt-3">{postData?.text}</p>
                   <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
                     <BiLike />
                     <AiOutlineComment />

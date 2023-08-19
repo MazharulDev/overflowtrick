@@ -1,7 +1,11 @@
 export interface IPost {
-  post: string;
-  name: string;
-  username: string;
-  image: string;
+  text: string;
+  author: {
+    name: string;
+    image: string;
+    username: string;
+  };
+  like: [];
+  comments: [];
   id: string;
 }

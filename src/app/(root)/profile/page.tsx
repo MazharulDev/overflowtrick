@@ -9,8 +9,7 @@ import { LiaUserEditSolid } from "react-icons/lia";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
-  const { data } = useGetSingleUserQuery(session?.user?.email);
-  const { data: post } = useGetPostByUsernameQuery(data?.data?.username, {
+  const { data } = useGetSingleUserQuery(session?.user?.email, {
     refetchOnMountOrArgChange: true,
   });
   return (
@@ -41,7 +40,13 @@ const ProfilePage = () => {
       {/* <p className="text-white mt-8">Mern stack Developer</p> */}
       <p className="border border-slate-800 mt-12"></p>
       <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
-      <div className="mt-5">{post?.data && <PostCard data={post?.data} />}</div>
+      <div className="mt-5">
+        {data?.data?.posts?.length > 0 ? (
+          <PostCard data={data?.data} />
+        ) : (
+          <p className="text-white">No post found</p>
+        )}
+      </div>
     </div>
   );
 };

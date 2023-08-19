@@ -39,10 +39,8 @@ const CreatePost = () => {
   };
   const postData = {
     data: {
-      post: val,
-      name: session?.user?.name,
-      username: data?.data?.username,
-      image: session?.user?.image,
+      text: val,
+      author: data?.data?._id,
     },
   };
   const handleSubmit = () => {

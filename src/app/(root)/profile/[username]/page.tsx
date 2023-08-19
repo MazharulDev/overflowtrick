@@ -4,7 +4,6 @@ import { useGetPostByUsernameQuery } from "@/redux/post/postApi";
 import { useGetUserByUsernameQuery } from "@/redux/user/userApi";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { LiaUserEditSolid } from "react-icons/lia";
 
 const DynamicUserProfile = ({
   params,
@@ -15,8 +14,6 @@ const DynamicUserProfile = ({
   };
 }) => {
   const { data } = useGetUserByUsernameQuery(params?.username);
-  const { data: postData } = useGetPostByUsernameQuery(data?.data?.username);
-  console.log(postData);
 
   return (
     <div>
@@ -43,7 +40,11 @@ const DynamicUserProfile = ({
       <p className="border border-slate-800 mt-12"></p>
       <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
       <div className="mt-5">
-        {postData?.data && <PostCard data={postData?.data} />}
+        {data?.data?.posts.length > 0 ? (
+          <PostCard data={data?.data} />
+        ) : (
+          <p>No data found</p>
+        )}
       </div>
     </div>
   );
