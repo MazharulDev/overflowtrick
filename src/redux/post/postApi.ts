@@ -12,7 +12,7 @@ const postApi = api.injectEndpoints({
     }),
     getAllPost: builder.query({
       query: () => "/posts",
-      providesTags: ["post"],
+      providesTags: ["post", "like"],
     }),
     getPostByUsername: builder.query({
       query: (username) => `/posts/${username}`,
@@ -23,6 +23,15 @@ const postApi = api.injectEndpoints({
         url: `/posts/delete/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["deletepost"],
+    }),
+    toggleLike: builder.mutation({
+      query: ({ postId, userId }) => ({
+        url: `/posts/like/${postId}`,
+        method: "POST",
+        body: { userId },
+      }),
+      invalidatesTags: ["like"],
     }),
   }),
 });
@@ -32,4 +41,5 @@ export const {
   useGetAllPostQuery,
   useGetPostByUsernameQuery,
   useDeletePostByIdMutation,
+  useToggleLikeMutation,
 } = postApi;

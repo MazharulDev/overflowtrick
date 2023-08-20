@@ -6,8 +6,9 @@ export interface IPost {
     name: string;
     image: string;
     username: string;
+    _id: string;
   };
-  like: [];
+  like: any;
   comments: [];
   id: string;
 }

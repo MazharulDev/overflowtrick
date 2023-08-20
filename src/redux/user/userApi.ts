@@ -15,6 +15,7 @@ const userApi = api.injectEndpoints({
     }),
     getSingleUser: builder.query({
       query: (email) => `/users/${email}`,
+      providesTags: ["deletepost"],
     }),
     getUserByUsername: builder.query({
       query: (username) => `/users/username/${username}`,
