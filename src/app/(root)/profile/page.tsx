@@ -1,6 +1,5 @@
 "use client";
 import PostCard from "@/app/components/card/PostCard";
-import { useGetPostByUsernameQuery } from "@/redux/post/postApi";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 
 import { useSession } from "next-auth/react";
@@ -11,6 +10,7 @@ const ProfilePage = () => {
   const { data: session } = useSession();
   const { data } = useGetSingleUserQuery(session?.user?.email, {
     refetchOnMountOrArgChange: true,
+    // pollingInterval: 2000,
   });
   return (
     <div>

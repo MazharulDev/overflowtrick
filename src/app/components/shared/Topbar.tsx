@@ -2,7 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import Searchbar from "./Searchbar";
+import { useSession } from "next-auth/react";
 function Topbar() {
+  const { data: session } = useSession();
   return (
     <nav className="topbar">
       <Link href="/" className="flex items-center gap-4">
@@ -38,14 +40,20 @@ function Topbar() {
           </div>
         </div>
 
-        {/* <OrganizationSwitcher
-          appearance={{
-            baseTheme: dark,
-            elements: {
-              organizationSwitcherTrigger: "py-2 px-4",
-            },
-          }}
-        /> */}
+        {/* ------------------------- */}
+        <div className="hidden lg:block">
+          <div className="flex justify-start items-center gap-4 text-white">
+            <Image
+              className="rounded-full"
+              src={session?.user?.image as string}
+              alt="logout"
+              width={40}
+              height={40}
+            />
+            <p className="text-body-bold">{session?.user?.name}</p>
+          </div>
+        </div>
+        {/* ------------------------ */}
       </div>
     </nav>
   );
