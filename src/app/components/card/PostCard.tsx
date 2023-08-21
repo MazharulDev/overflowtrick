@@ -1,18 +1,16 @@
 import { IPost } from "@/interfaces/post";
 import {
+  useDeletePostByIdMutation,
   useGetPostsByIdQuery,
-  useToggleLikeMutation,
 } from "@/redux/post/postApi";
-import {
-  useGetSingleUserQuery,
-  useGetUserByUsernameQuery,
-} from "@/redux/user/userApi";
-import { useSession } from "next-auth/react";
+import { useGetUserByUsernameQuery } from "@/redux/user/userApi";
+
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineComment } from "react-icons/ai";
-import { BiLike, BiSolidLike } from "react-icons/bi";
-import { RiShareForward2Fill } from "react-icons/ri";
+import PostActionPage from "./PostAction";
+import { AiOutlineDelete } from "react-icons/ai";
+import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 interface IProps {
   id: string;
@@ -21,13 +19,12 @@ interface IProps {
 
 const PostCard = ({ id, username }: IProps) => {
   const { data: session } = useSession();
-  const { data: user } = useGetSingleUserQuery(session?.user?.email);
   const { data } = useGetPostsByIdQuery(id);
   const { data: postAuthor } = useGetUserByUsernameQuery(username);
-
-  const [toggleLike] = useToggleLikeMutation();
-  const handleLike = (postId: string, userId: string) => {
-    toggleLike({ postId, userId });
+  const [deletePostById] = useDeletePostByIdMutation();
+  const handleDeletePost = (id: string) => {
+    deletePostById({ id });
+    toast.success("Deleted post successfully");
   };
   return (
     <div className="text-white">
@@ -49,61 +46,31 @@ const PostCard = ({ id, username }: IProps) => {
                   />
                 </div>
                 <div className="text-white col-span-11">
-                  <div className="flex justify-between items-center">
-                    <div className="flex justify-start items-center gap-2">
-                      <Link
-                        href={`/profile/${postAuthor?.data?.username}`}
-                        className="text-small-medium cursor-pointer hover:underline"
-                      >
-                        {postAuthor?.data?.name}
-                      </Link>
-                      <p className="text-slate-600">
-                        @{postAuthor?.data?.username}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="mt-3">{postData?.text}</p>
-                  <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
-                    <div className="flex justify-start items-center gap-1">
-                      {postData?.like?.find(
-                        (e: any) => e.id === user?.data?.id
-                      ) ? (
-                        <div
-                          className="cursor-pointer text-green-500 hover:text-white"
-                          onClick={() =>
-                            handleLike(postData?.id, user?.data?._id)
-                          }
+                  <div className="flex justify-between items-start">
+                    <div className="flex justify-between items-center">
+                      <div className="flex justify-start items-center gap-2">
+                        <Link
+                          href={`/profile/${postAuthor?.data?.username}`}
+                          className="text-small-medium cursor-pointer hover:underline"
                         >
-                          <BiSolidLike />
-                        </div>
-                      ) : (
-                        <div
-                          className="cursor-pointer hover:text-green-500"
-                          onClick={() =>
-                            handleLike(postData?.id, user?.data?._id)
-                          }
-                        >
-                          <BiLike />
-                        </div>
-                      )}
-                      <div>
-                        {postData?.like?.length ? (
-                          <p className="text-small-regular">
-                            ({postData?.like?.length})
-                          </p>
-                        ) : (
-                          ""
-                        )}
+                          {postAuthor?.data?.name}
+                        </Link>
+                        <p className="text-slate-600">
+                          @{postAuthor?.data?.username}
+                        </p>
                       </div>
                     </div>
-                    <Link
-                      href={`/post/${postData?.id}`}
-                      className="cursor-pointer hover:text-green-500"
-                    >
-                      <AiOutlineComment />
-                    </Link>
-                    <RiShareForward2Fill />
+                    {postAuthor?.data?.email === session?.user?.email && (
+                      <div
+                        onClick={() => handleDeletePost(postData.id)}
+                        className="text-heading4-medium text-red-500 hover:text-red-600 cursor-pointer"
+                      >
+                        <AiOutlineDelete />
+                      </div>
+                    )}
                   </div>
+                  <p className="mt-3">{postData?.text}</p>
+                  <PostActionPage data={postData} />
                 </div>
               </div>
             </div>

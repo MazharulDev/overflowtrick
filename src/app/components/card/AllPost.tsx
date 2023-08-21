@@ -1,28 +1,14 @@
 import { IPost } from "@/interfaces/post";
-import {
-  useGetAllPostQuery,
-  useToggleLikeMutation,
-} from "@/redux/post/postApi";
-import { useGetSingleUserQuery } from "@/redux/user/userApi";
-import { useSession } from "next-auth/react";
+import { useGetAllPostQuery } from "@/redux/post/postApi";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineComment } from "react-icons/ai";
-import { BiLike, BiSolidLike } from "react-icons/bi";
-import { RiShareForward2Fill } from "react-icons/ri";
+import PostActionPage from "./PostAction";
 
 const AllPost = () => {
-  const { data: session } = useSession();
-  const { data: user } = useGetSingleUserQuery(session?.user?.email);
   const { data } = useGetAllPostQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-
-  const [toggleLike] = useToggleLikeMutation();
-  const handleLike = (postId: string, userId: string) => {
-    toggleLike({ postId, userId });
-  };
   return (
     <div className="text-white">
       {data?.data.length > 0 ? (
@@ -57,47 +43,7 @@ const AllPost = () => {
                     </div>
                   </div>
                   <p className="mt-3 cursor-pointer">{postData?.text}</p>
-                  <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
-                    <div className="flex justify-start items-center gap-1">
-                      {postData?.like?.find(
-                        (e: any) => e?.id === user?.data?.id
-                      ) ? (
-                        <div
-                          className="cursor-pointer text-green-500 hover:text-white"
-                          onClick={() =>
-                            handleLike(postData?.id, user?.data?._id)
-                          }
-                        >
-                          <BiSolidLike />
-                        </div>
-                      ) : (
-                        <div
-                          className="cursor-pointer hover:text-green-500"
-                          onClick={() =>
-                            handleLike(postData?.id, user?.data?._id)
-                          }
-                        >
-                          <BiLike />
-                        </div>
-                      )}
-                      <div>
-                        {postData?.like?.length ? (
-                          <p className="text-small-regular">
-                            ({postData?.like?.length})
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </div>
-                    <Link
-                      href={`/post/${postData?.id}`}
-                      className="cursor-pointer hover:text-green-500"
-                    >
-                      <AiOutlineComment />
-                    </Link>
-                    <RiShareForward2Fill />
-                  </div>
+                  <PostActionPage data={postData} />
                 </div>
               </div>
             </div>
