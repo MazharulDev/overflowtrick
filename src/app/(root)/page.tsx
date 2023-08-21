@@ -5,15 +5,16 @@ import CreatePost from "../components/card/CreatePost";
 import { useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { redirect } from "next/navigation";
+import { useGetAllPostQuery } from "@/redux/post/postApi";
 
 export default function Home() {
   const { data: session } = useSession();
   const {
     data: userByEmail,
-    isLoading,
+    // isLoading,
     isFetching,
   } = useGetSingleUserQuery(session?.user?.email);
-  if (isLoading || isFetching) {
+  if (isFetching) {
     return <p className="text-heading3-bold text-white">Loading...</p>;
   } else {
     if (session?.user?.email) {

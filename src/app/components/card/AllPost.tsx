@@ -56,7 +56,7 @@ const AllPost = () => {
                       </p>
                     </div>
                   </div>
-                  <p className="mt-3">{postData?.text}</p>
+                  <p className="mt-3 cursor-pointer">{postData?.text}</p>
                   <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
                     <div className="flex justify-start items-center gap-1">
                       {postData?.like?.find(
@@ -81,12 +81,21 @@ const AllPost = () => {
                         </div>
                       )}
                       <div>
-                        <p className="text-small-regular">
-                          ({postData?.like?.length})
-                        </p>
+                        {postData?.like?.length ? (
+                          <p className="text-small-regular">
+                            ({postData?.like?.length})
+                          </p>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
-                    <AiOutlineComment />
+                    <Link
+                      href={`/post/${postData?.id}`}
+                      className="cursor-pointer hover:text-green-500"
+                    >
+                      <AiOutlineComment />
+                    </Link>
                     <RiShareForward2Fill />
                   </div>
                 </div>
