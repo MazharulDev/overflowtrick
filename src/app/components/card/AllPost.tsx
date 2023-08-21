@@ -58,27 +58,34 @@ const AllPost = () => {
                   </div>
                   <p className="mt-3">{postData?.text}</p>
                   <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
-                    {postData?.like?.find(
-                      (e: any) => e?.id === user?.data?.id
-                    ) ? (
-                      <div
-                        className="cursor-pointer text-green-500 hover:text-white"
-                        onClick={() =>
-                          handleLike(postData?.id, user?.data?._id)
-                        }
-                      >
-                        <BiSolidLike />
+                    <div className="flex justify-start items-center gap-1">
+                      {postData?.like?.find(
+                        (e: any) => e?.id === user?.data?.id
+                      ) ? (
+                        <div
+                          className="cursor-pointer text-green-500 hover:text-white"
+                          onClick={() =>
+                            handleLike(postData?.id, user?.data?._id)
+                          }
+                        >
+                          <BiSolidLike />
+                        </div>
+                      ) : (
+                        <div
+                          className="cursor-pointer hover:text-green-500"
+                          onClick={() =>
+                            handleLike(postData?.id, user?.data?._id)
+                          }
+                        >
+                          <BiLike />
+                        </div>
+                      )}
+                      <div>
+                        <p className="text-small-regular">
+                          ({postData?.like?.length})
+                        </p>
                       </div>
-                    ) : (
-                      <div
-                        className="cursor-pointer hover:text-green-500"
-                        onClick={() =>
-                          handleLike(postData?.id, user?.data?._id)
-                        }
-                      >
-                        <BiLike />
-                      </div>
-                    )}
+                    </div>
                     <AiOutlineComment />
                     <RiShareForward2Fill />
                   </div>

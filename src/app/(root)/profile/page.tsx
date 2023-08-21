@@ -42,7 +42,7 @@ const ProfilePage = () => {
       <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
       <div className="mt-5">
         {data?.data?.posts?.length > 0 ? (
-          <PostCard data={data?.data} />
+          <PostCard id={data?.data?.id} username={data?.data?.username} />
         ) : (
           <p className="text-white">No post found</p>
         )}

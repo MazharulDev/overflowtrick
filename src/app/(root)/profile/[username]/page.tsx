@@ -1,6 +1,5 @@
 "use client";
 import PostCard from "@/app/components/card/PostCard";
-import { useGetPostByUsernameQuery } from "@/redux/post/postApi";
 import { useGetUserByUsernameQuery } from "@/redux/user/userApi";
 import Image from "next/image";
 import { ReactNode } from "react";
@@ -40,8 +39,8 @@ const DynamicUserProfile = ({
       <p className="border border-slate-800 mt-12"></p>
       <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
       <div className="mt-5">
-        {data?.data?.posts.length > 0 ? (
-          <PostCard data={data?.data} />
+        {data?.data?.id ? (
+          <PostCard id={data?.data?.id} username={data?.data?.username} />
         ) : (
           <p>No data found</p>
         )}

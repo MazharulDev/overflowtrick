@@ -19,6 +19,7 @@ const userApi = api.injectEndpoints({
     }),
     getUserByUsername: builder.query({
       query: (username) => `/users/username/${username}`,
+      providesTags: ["post", "like"],
     }),
   }),
 });
