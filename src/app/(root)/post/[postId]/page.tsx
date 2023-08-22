@@ -1,4 +1,5 @@
 "use client";
+import CommentCardPage from "@/app/components/card/CommentCard";
 import CreateCommentPage from "@/app/components/card/CreateComment";
 import {
   useGetPostByIdQuery,
@@ -92,8 +93,26 @@ const singlePostPage = ({
                   </div>
                 </div>
 
-                <AiOutlineComment />
+                {/* ==================== */}
 
+                <div className="flex justify-start items-center gap-2">
+                  {postData?.data?.comments?.length > 0 ? (
+                    <div className="cursor-pointer text-green-500">
+                      <AiOutlineComment />
+                    </div>
+                  ) : (
+                    <div className="cursor-pointer hover:text-green-500">
+                      <AiOutlineComment />
+                    </div>
+                  )}
+                  {postData?.data?.comments?.length ? (
+                    <p className="text-small-regular">{`(${postData?.data?.comments?.length})`}</p>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                {/* ===================== */}
                 <RiShareForward2Fill />
               </div>
             </div>
@@ -102,7 +121,10 @@ const singlePostPage = ({
       ) : (
         <p className="text-heading4-medium text-white">Loading...</p>
       )}
-      <CreateCommentPage id={params?.postId} />
+      <CreateCommentPage postId={params?.postId} />
+      <div className="mt-5">
+        <CommentCardPage comments={postData?.data?.comments} />
+      </div>
     </div>
   );
 };

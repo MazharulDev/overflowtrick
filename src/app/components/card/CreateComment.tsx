@@ -5,10 +5,10 @@ import Image from "next/image";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface IParams {
-  id: ReactNode;
+  postId: ReactNode;
 }
 
-const CreateCommentPage = ({ id }: IParams) => {
+const CreateCommentPage = ({ postId }: IParams) => {
   const { data: session } = useSession();
   const { data } = useGetSingleUserQuery(session?.user?.email);
   const [createComment] = useCreateCommentMutation();
@@ -32,9 +32,9 @@ const CreateCommentPage = ({ id }: IParams) => {
     text: val,
     author: data?.data?._id,
   };
+
   const handleSubmit = () => {
-    // console.log({ id, commentData });
-    createComment({ id, commentData });
+    createComment({ postId, commentData });
     setVal("");
   };
   return (

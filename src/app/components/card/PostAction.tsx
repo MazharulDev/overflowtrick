@@ -41,12 +41,28 @@ const PostActionPage = ({ data }: any) => {
           )}
         </div>
       </div>
-      <Link
-        href={`/post/${data?.id}`}
-        className="cursor-pointer hover:text-green-500"
-      >
-        <AiOutlineComment />
-      </Link>
+      <div className="flex justify-start items-center gap-2">
+        {data?.comments?.length > 0 ? (
+          <Link
+            href={`/post/${data?.id}`}
+            className="cursor-pointer text-green-500"
+          >
+            <AiOutlineComment />
+          </Link>
+        ) : (
+          <Link
+            href={`/post/${data?.id}`}
+            className="cursor-pointer hover:text-green-500"
+          >
+            <AiOutlineComment />
+          </Link>
+        )}
+        {data?.comments?.length ? (
+          <p className="text-small-regular">{`(${data?.comments?.length})`}</p>
+        ) : (
+          ""
+        )}
+      </div>
       <RiShareForward2Fill />
     </div>
   );
