@@ -1,4 +1,5 @@
 "use client";
+import CreateCommentPage from "@/app/components/card/CreateComment";
 import {
   useGetPostByIdQuery,
   useToggleLikeMutation,
@@ -29,8 +30,9 @@ const singlePostPage = ({
   };
   return (
     <div>
+      <h1 className="text-heading3-bold text-white text-left mb-5">Post</h1>
       {postData?.data?.author?.email ? (
-        <div className="mb-5 bg-slate-950 p-5 rounded-2xl">
+        <div className="mb-5 bg-slate-950 p-5 rounded-2xl ">
           <div className="grid grid-cols-12">
             <div className="col-span-1">
               <Image
@@ -100,6 +102,7 @@ const singlePostPage = ({
       ) : (
         <p className="text-heading4-medium text-white">Loading...</p>
       )}
+      <CreateCommentPage id={params?.postId} />
     </div>
   );
 };
