@@ -3,6 +3,7 @@ import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
 
 interface IParams {
   postId: ReactNode;
@@ -11,7 +12,7 @@ interface IParams {
 const CreateCommentPage = ({ postId }: IParams) => {
   const { data: session } = useSession();
   const { data } = useGetSingleUserQuery(session?.user?.email);
-  const [createComment] = useCreateCommentMutation();
+  const [createComment, { isSuccess }] = useCreateCommentMutation();
   const [val, setVal] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -36,6 +37,9 @@ const CreateCommentPage = ({ postId }: IParams) => {
 
   const handleSubmit = () => {
     createComment({ commentData });
+    if (isSuccess) {
+      toast.success("Add reply");
+    }
     setVal("");
   };
   return (

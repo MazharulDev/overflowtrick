@@ -21,10 +21,12 @@ const PostCard = ({ id, username }: IProps) => {
   const { data: session } = useSession();
   const { data } = useGetPostsByIdQuery(id);
   const { data: postAuthor } = useGetUserByUsernameQuery(username);
-  const [deletePostById] = useDeletePostByIdMutation();
+  const [deletePostById, { isSuccess }] = useDeletePostByIdMutation();
   const handleDeletePost = (id: string) => {
     deletePostById({ id });
-    toast.success("Deleted post successfully");
+    if (isSuccess) {
+      toast.success("Deleted post successfully");
+    }
   };
   return (
     <div className="text-white">
