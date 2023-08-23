@@ -60,14 +60,16 @@ const CreatePost = () => {
             alt="profile pic"
           />
         )}
-        <textarea
-          ref={textAreaRef}
-          value={val}
-          onChange={onChange}
-          rows={1}
-          className="outline-none bg-dark-1 text-white col-span-4 w-full mt-5 resize-none"
-          placeholder={`What's on your mind, ${session?.user?.name}?`}
-        ></textarea>
+        {session?.user?.name && (
+          <textarea
+            ref={textAreaRef}
+            value={val}
+            onChange={onChange}
+            rows={1}
+            className="outline-none bg-dark-1 text-white col-span-4 w-full mt-5 resize-none"
+            placeholder={`What's on your mind, ${session?.user?.name}?`}
+          ></textarea>
+        )}
       </div>
       <div className="mt-5 flex justify-end">
         {val.length > 2 ? (

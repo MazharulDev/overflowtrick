@@ -42,16 +42,18 @@ function Topbar() {
 
         {/* ------------------------- */}
         <div className="hidden lg:block">
-          <div className="flex justify-start items-center gap-4 text-white">
-            <Image
-              className="rounded-full"
-              src={session?.user?.image as string}
-              alt="logout"
-              width={40}
-              height={40}
-            />
-            <p className="text-body-bold">{session?.user?.name}</p>
-          </div>
+          {session?.user?.email && (
+            <div className="flex justify-start items-center gap-4 text-white">
+              <Image
+                className="rounded-full"
+                src={session?.user?.image as string}
+                alt="logout"
+                width={40}
+                height={40}
+              />
+              <p className="text-body-bold">{session?.user?.name}</p>
+            </div>
+          )}
         </div>
         {/* ------------------------ */}
       </div>

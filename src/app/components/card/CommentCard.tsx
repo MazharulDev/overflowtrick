@@ -6,7 +6,6 @@ interface IProps {
 }
 
 const CommentCardPage = ({ comments }: IProps) => {
-  console.log(comments);
   return (
     <div className="text-white">
       {comments?.map((comment) => (

@@ -20,14 +20,14 @@ const PostActionPage = ({ data }: any) => {
       <div className="flex justify-start items-center gap-1">
         {data?.like?.find((e: any) => e?.id === user?.data?.id) ? (
           <div
-            className="cursor-pointer text-green-500 hover:text-white"
+            className="cursor-pointer text-green-500 hover:text-white shadow-lg transform active:scale-75 transition-transform"
             onClick={() => handleLike(data?.id, user?.data?._id)}
           >
             <BiSolidLike />
           </div>
         ) : (
           <div
-            className="cursor-pointer hover:text-green-500"
+            className="cursor-pointer hover:text-green-500 shadow-lg transform active:scale-75 transition-transform"
             onClick={() => handleLike(data?.id, user?.data?._id)}
           >
             <BiLike />

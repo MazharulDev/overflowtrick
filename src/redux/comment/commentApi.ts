@@ -3,8 +3,8 @@ import { api } from "../api/apiSlice";
 const commentApi = api.injectEndpoints({
   endpoints: (builder) => ({
     createComment: builder.mutation({
-      query: ({ postId, commentData }) => ({
-        url: `/comments/${postId}`,
+      query: ({ commentData }) => ({
+        url: `/comments/`,
         method: "POST",
         body: commentData,
       }),

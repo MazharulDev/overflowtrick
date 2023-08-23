@@ -31,10 +31,11 @@ const CreateCommentPage = ({ postId }: IParams) => {
   const commentData = {
     text: val,
     author: data?.data?._id,
+    postId: postId,
   };
 
   const handleSubmit = () => {
-    createComment({ postId, commentData });
+    createComment({ commentData });
     setVal("");
   };
   return (
