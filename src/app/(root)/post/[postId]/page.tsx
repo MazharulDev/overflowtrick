@@ -1,6 +1,7 @@
 "use client";
 import CommentCardPage from "@/app/components/card/CommentCard";
 import CreateCommentPage from "@/app/components/card/CreateComment";
+import TimeAgo from "@/app/components/dateAdd/TimeAgo";
 import {
   useGetPostByIdQuery,
   useToggleLikeMutation,
@@ -56,6 +57,8 @@ const singlePostPage = ({
                   <p className="text-slate-600">
                     @{postData?.data?.author?.username}
                   </p>
+                  <p>-</p>
+                  <TimeAgo createdAt={postData?.data?.createdAt} />
                 </div>
               </div>
               <p className="mt-3 cursor-pointer">{postData?.data?.text}</p>

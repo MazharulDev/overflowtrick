@@ -11,6 +11,7 @@ import PostActionPage from "./PostAction";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
+// import TimeAgo from "../dateAdd/TimeAgo";
 
 interface IProps {
   id: string;
@@ -60,6 +61,13 @@ const PostCard = ({ id, username }: IProps) => {
                         <p className="text-slate-600">
                           @{postAuthor?.data?.username}
                         </p>
+
+                        {/* <p>-</p> */}
+                        {/* <TimeAgo
+                          createdAt={postAuthor?.data?.posts?.map(
+                            (post: { createdAt: any }) => post?.createdAt
+                          )}
+                        /> */}
                       </div>
                     </div>
                     {postAuthor?.data?.email === session?.user?.email && (

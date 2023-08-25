@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
+import TimeAgo from "../dateAdd/TimeAgo";
 
 interface IProps {
   comments: ICommnets[];
@@ -38,6 +39,8 @@ const CommentCardPage = ({ comments }: IProps) => {
                 <div className="flex justify-start items-center gap-2">
                   <p className="">{comment?.author?.name}</p>
                   <p className="text-slate-600">@{comment?.author?.username}</p>
+                  <p>-</p>
+                  <TimeAgo createdAt={comment?.createdAt} />
                 </div>
 
                 {comment?.author?.email === session?.user?.email && (

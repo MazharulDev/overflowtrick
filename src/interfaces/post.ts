@@ -11,4 +11,5 @@ export interface IPost {
   like: any;
   comments: [];
   id: string;
+  createdAt: number;
 }

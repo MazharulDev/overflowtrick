@@ -3,6 +3,7 @@ import { useGetAllPostQuery } from "@/redux/post/postApi";
 import Image from "next/image";
 import Link from "next/link";
 import PostActionPage from "./PostAction";
+import TimeAgo from "../dateAdd/TimeAgo";
 
 const AllPost = () => {
   const { data } = useGetAllPostQuery(undefined, {
@@ -18,7 +19,7 @@ const AllPost = () => {
               key={postData.id}
               className="mb-5 bg-slate-950 p-5 rounded-2xl"
             >
-              <div className="grid grid-cols-12">
+              <div className="grid grid-cols-12 gap-2">
                 <div className="col-span-1">
                   <Image
                     className="rounded-full"
@@ -40,6 +41,8 @@ const AllPost = () => {
                       <p className="text-slate-600">
                         @{postData?.author?.username}
                       </p>
+                      <p>-</p>
+                      <TimeAgo createdAt={postData?.createdAt} />
                     </div>
                   </div>
                   <p className="mt-3 cursor-pointer">{postData?.text}</p>
