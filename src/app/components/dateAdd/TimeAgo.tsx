@@ -1,6 +1,4 @@
 import { formatDistanceToNow } from "date-fns";
-import { addDays } from "date-fns";
-import { isBefore } from "date-fns";
 import { format } from "date-fns";
 
 interface IProps {

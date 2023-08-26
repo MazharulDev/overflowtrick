@@ -11,7 +11,7 @@ import PostActionPage from "./PostAction";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
-// import TimeAgo from "../dateAdd/TimeAgo";
+import TimeAgo from "../dateAdd/TimeAgo";
 
 interface IProps {
   id: string;
@@ -22,11 +22,13 @@ const PostCard = ({ id, username }: IProps) => {
   const { data: session } = useSession();
   const { data } = useGetPostsByIdQuery(id);
   const { data: postAuthor } = useGetUserByUsernameQuery(username);
-  const [deletePostById, { isSuccess }] = useDeletePostByIdMutation();
+  const [deletePostById, { isError }] = useDeletePostByIdMutation();
   const handleDeletePost = (id: string) => {
     deletePostById({ id });
-    if (isSuccess) {
-      toast.success("Deleted post successfully");
+    if (isError) {
+      toast.error("Someting went wrong..");
+    } else {
+      toast.success("Post deleted successfully");
     }
   };
   return (
@@ -62,12 +64,8 @@ const PostCard = ({ id, username }: IProps) => {
                           @{postAuthor?.data?.username}
                         </p>
 
-                        {/* <p>-</p> */}
-                        {/* <TimeAgo
-                          createdAt={postAuthor?.data?.posts?.map(
-                            (post: { createdAt: any }) => post?.createdAt
-                          )}
-                        /> */}
+                        <p>-</p>
+                        <TimeAgo createdAt={postData?.createdAt} />
                       </div>
                     </div>
                     {postAuthor?.data?.email === session?.user?.email && (
