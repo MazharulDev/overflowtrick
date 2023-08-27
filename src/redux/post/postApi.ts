@@ -11,7 +11,7 @@ const postApi = api.injectEndpoints({
       invalidatesTags: ["post"],
     }),
     getAllPost: builder.query({
-      query: () => "/posts",
+      query: (page) => `/posts?page=${page}`,
       providesTags: ["post", "like"],
     }),
     deletePostById: builder.mutation({

@@ -4,9 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import PostActionPage from "./PostAction";
 import TimeAgo from "../dateAdd/TimeAgo";
+import { useState } from "react";
+import Pagination from "../dateAdd/pagination/Pagination";
 
 const AllPost = () => {
-  const { data } = useGetAllPostQuery(undefined, {
+  const [page, setPage] = useState<number>(1);
+  const { data } = useGetAllPostQuery(page, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
@@ -55,6 +58,9 @@ const AllPost = () => {
       ) : (
         <p>No post found</p>
       )}
+      <div>
+        <Pagination page={page} setPage={setPage} length={data?.meta?.total} />
+      </div>
     </div>
   );
 };
