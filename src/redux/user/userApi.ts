@@ -21,6 +21,12 @@ const userApi = api.injectEndpoints({
       query: (username) => `/users/username/${username}`,
       providesTags: ["post", "like"],
     }),
+    getCommnetNotification: builder.query({
+      query: (userId) => ({
+        url: `/users/notification/${userId}`,
+      }),
+      // providesTags: ["post", "like"],
+    }),
   }),
 });
 
@@ -29,4 +35,5 @@ export const {
   useGetUserQuery,
   useGetSingleUserQuery,
   useGetUserByUsernameQuery,
+  useGetCommnetNotificationQuery,
 } = userApi;
