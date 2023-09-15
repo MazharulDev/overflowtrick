@@ -12,20 +12,21 @@ const ProfilePage = () => {
     refetchOnMountOrArgChange: true,
     // pollingInterval: 2000,
   });
+
   return (
     <div>
       <div className="flex justify-between items-center">
-        {session?.user?.email ? (
+        {session?.user?.email && data?.data?.email ? (
           <div className="flex justify-start items-center gap-5">
             <Image
               className="rounded-full"
-              src={session?.user?.image as string}
+              src={data?.data?.image as string}
               width={80}
               height={80}
               alt="profile pic"
             />
             <div className="text-white">
-              <h2 className="text-heading3-bold">{session?.user?.name}</h2>
+              <h2 className="text-heading3-bold">{data?.data?.name}</h2>
               <p className="text-slate-400">@{data?.data?.username}</p>
             </div>
           </div>
