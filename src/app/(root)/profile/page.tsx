@@ -4,6 +4,7 @@ import { useGetSingleUserQuery } from "@/redux/user/userApi";
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { LiaUserEditSolid } from "react-icons/lia";
 
 const ProfilePage = () => {
@@ -35,7 +36,7 @@ const ProfilePage = () => {
         )}
         <div className="text-white flex justify-center items-center gap-2 font-bold px-3 py-2 bg-dark-3 hover:bg-dark-2 cursor-pointer rounded-lg duration-100">
           <LiaUserEditSolid className="text-blue text-heading3-bold" />
-          <button>Edit</button>
+          <Link href="/profile/edit">Edit</Link>
         </div>
       </div>
       {/* <p className="text-white mt-8">Mern stack Developer</p> */}
