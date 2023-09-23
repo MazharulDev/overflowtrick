@@ -34,10 +34,13 @@ const ProfilePage = () => {
         ) : (
           <p className="text-white text-heading2-bold">Loading...</p>
         )}
-        <div className="text-white flex justify-center items-center gap-2 font-bold px-3 py-2 bg-dark-3 hover:bg-dark-2 cursor-pointer rounded-lg duration-100">
+        <Link
+          href="/profile/edit"
+          className="text-white flex justify-center items-center gap-2 font-bold px-3 py-2 bg-dark-3 hover:bg-dark-2 cursor-pointer rounded-lg duration-100"
+        >
           <LiaUserEditSolid className="text-blue text-heading3-bold" />
-          <Link href="/profile/edit">Edit</Link>
-        </div>
+          <button>Edit</button>
+        </Link>
       </div>
       {/* <p className="text-white mt-8">Mern stack Developer</p> */}
       <p className="border border-slate-800 mt-12"></p>
