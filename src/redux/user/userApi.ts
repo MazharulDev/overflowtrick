@@ -27,6 +27,13 @@ const userApi = api.injectEndpoints({
       }),
       // providesTags: ["post", "like"],
     }),
+    updateUser: builder.mutation({
+      query: ({ userId, ...data }) => ({
+        url: `/users/${userId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -36,4 +43,5 @@ export const {
   useGetSingleUserQuery,
   useGetUserByUsernameQuery,
   useGetCommnetNotificationQuery,
+  useUpdateUserMutation,
 } = userApi;
