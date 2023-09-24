@@ -5,7 +5,9 @@ import {
 } from "@/redux/user/userApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Inputs = {
   name: string;
@@ -15,6 +17,7 @@ type Inputs = {
 const profileEditPage = () => {
   const [updateUser] = useUpdateUserMutation();
   const { data: session } = useSession();
+  const router = useRouter();
   const { data } = useGetSingleUserQuery(session?.user?.email, {
     refetchOnMountOrArgChange: true,
     // pollingInterval: 2000,
@@ -31,6 +34,8 @@ const profileEditPage = () => {
       username: data.username,
     };
     updateUser({ userId, userData });
+    toast.success("Updated profile successfully");
+    router.push("/profile");
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

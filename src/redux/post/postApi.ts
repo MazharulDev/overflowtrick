@@ -31,11 +31,17 @@ const postApi = api.injectEndpoints({
     }),
     getPostsById: builder.query({
       query: (id) => `/posts/${id}`,
-      providesTags: ["post", "like", "deletepost"],
+      providesTags: ["post", "like", "deletepost", "updateProfile"],
     }),
     getPostById: builder.query({
       query: (id) => `/posts/post/${id}`,
-      providesTags: ["post", "like", "comment", "deletecomment"],
+      providesTags: [
+        "post",
+        "like",
+        "comment",
+        "deletecomment",
+        "updateProfile",
+      ],
     }),
   }),
 });

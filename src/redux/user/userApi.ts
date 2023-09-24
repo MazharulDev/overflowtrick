@@ -12,14 +12,15 @@ const userApi = api.injectEndpoints({
     }),
     getUser: builder.query({
       query: () => "/users",
+      providesTags: ["updateProfile"],
     }),
     getSingleUser: builder.query({
       query: (email) => `/users/${email}`,
-      providesTags: ["deletepost"],
+      providesTags: ["deletepost", "updateProfile"],
     }),
     getUserByUsername: builder.query({
       query: (username) => `/users/username/${username}`,
-      providesTags: ["post", "like"],
+      providesTags: ["post", "like", "updateProfile"],
     }),
     getCommnetNotification: builder.query({
       query: (userId) => ({
@@ -33,6 +34,7 @@ const userApi = api.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["updateProfile"],
     }),
   }),
 });
