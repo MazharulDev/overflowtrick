@@ -1,66 +1,40 @@
-async function RightSidebar() {
-  //   const user = await currentUser();
-  //   if (!user) return null;
+"use client";
+import { IUser } from "@/interfaces/author";
+import { useGetUserQuery } from "@/redux/user/userApi";
+import UserCardPage from "../card/UserCard";
 
-  //   const similarMinds = await fetchUsers({
-  //     userId: user.id,
-  //     pageSize: 4,
-  //   });
-
-  //   const suggestedCOmmunities = await fetchCommunities({ pageSize: 4 });
+const RightSidebar = () => {
+  const { data: users } = useGetUserQuery(undefined);
 
   return (
     <section className="custom-scrollbar rightsidebar">
       <div className="flex flex-1 flex-col justify-start">
-        <h3 className="text-heading4-medium text-light-1">
-          Your Pages and profiles
-        </h3>
-
-        {/* <div className="mt-7 flex w-[350px] flex-col gap-9">
-          {suggestedCOmmunities.communities.length > 0 ? (
+        <h3 className="text-heading4-medium text-light-1">Suggested for you</h3>
+        <div className="mt-7 flex w-[250px] flex-col gap-8">
+          {users?.data?.length > 0 ? (
             <>
-              {suggestedCOmmunities.communities.map((community) => (
-                <UserCard
-                  key={community.id}
-                  id={community.id}
-                  name={community.name}
-                  username={community.username}
-                  imgUrl={community.image}
-                  personType="Community"
-                />
-              ))}
-            </>
-          ) : (
-            <p className="!text-base-regular text-light-3">
-              No communities yet
-            </p>
-          )}
-        </div> */}
-      </div>
-
-      <div className="flex flex-1 flex-col justify-start">
-        <h3 className="text-heading4-medium text-light-1">Trends for you</h3>
-        {/* <div className="mt-7 flex w-[350px] flex-col gap-10">
-          {similarMinds.users.length > 0 ? (
-            <>
-              {similarMinds.users.map((person) => (
-                <UserCard
-                  key={person.id}
-                  id={person.id}
-                  name={person.name}
-                  username={person.username}
-                  imgUrl={person.image}
-                  personType="User"
-                />
+              {users?.data?.slice(0, 3).map((person: IUser) => (
+                <UserCardPage key={person.id} person={person} />
               ))}
             </>
           ) : (
             <p className="!text-base-regular text-light-3">No users yet</p>
           )}
-        </div> */}
+        </div>
+      </div>
+      <div>
+        <h2 className="text-slate-600">
+          Copyright &copy; 2023 overflowtrick <br /> Developed By{" "}
+          <a
+            className="text-green-700 hover:underline"
+            href="https://mdmazharulislam-dev.web.app/"
+          >
+            Md Mazharul Islam
+          </a>
+        </h2>
       </div>
     </section>
   );
-}
+};
 
 export default RightSidebar;

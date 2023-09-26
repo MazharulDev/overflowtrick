@@ -14,6 +14,10 @@ const postApi = api.injectEndpoints({
       query: (page) => `/posts?page=${page}`,
       providesTags: ["post", "like"],
     }),
+    getSearchPost: builder.query({
+      query: (text) => `/posts?searchTerm=${text}`,
+      providesTags: ["post", "like"],
+    }),
     deletePostById: builder.mutation({
       query: ({ id }) => ({
         url: `/posts/delete/${id}`,
@@ -53,4 +57,5 @@ export const {
   useToggleLikeMutation,
   useGetPostsByIdQuery,
   useGetPostByIdQuery,
+  useGetSearchPostQuery,
 } = postApi;
