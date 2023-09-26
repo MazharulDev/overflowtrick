@@ -3,8 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Searchbar from "./Searchbar";
 import { useSession } from "next-auth/react";
+import { useGetSingleUserQuery } from "@/redux/user/userApi";
 function Topbar() {
   const { data: session } = useSession();
+  const { data } = useGetSingleUserQuery(session?.user?.email, {
+    refetchOnMountOrArgChange: true,
+    // pollingInterval: 2000,
+  });
   return (
     <nav className="topbar">
       <Link href="/" className="flex items-center gap-4">
@@ -46,12 +51,12 @@ function Topbar() {
             <div className="flex justify-start items-center gap-4 text-white">
               <Image
                 className="rounded-full"
-                src={session?.user?.image as string}
+                src={data?.data?.image as string}
                 alt="logout"
                 width={40}
                 height={40}
               />
-              <p className="text-body-bold">{session?.user?.name}</p>
+              <p className="text-body-bold">{data?.data?.name}</p>
             </div>
           )}
         </div>

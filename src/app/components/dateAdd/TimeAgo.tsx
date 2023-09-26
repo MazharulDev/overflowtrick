@@ -14,7 +14,7 @@ const TimeAgo = ({ createdAt }: IProps) => {
   );
   return (
     <div>
-      <p className="text-small-medium text-slate-500">
+      <p className="text-subtle-medium text-slate-500">
         {daysPassed >= 3
           ? format(createdAtDate, "dd LLL yyyy")
           : formatDistanceToNow(createdAtDate, { addSuffix: true })}

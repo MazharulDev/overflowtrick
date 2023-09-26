@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { redirect } from "next/navigation";
 import { useGetAllPostQuery } from "@/redux/post/postApi";
+import LoadingSpinner from "../components/loadingSpinner/Loading";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -15,7 +16,7 @@ export default function Home() {
     isFetching,
   } = useGetSingleUserQuery(session?.user?.email);
   if (isFetching) {
-    return <p className="text-heading3-bold text-white">Loading...</p>;
+    return <LoadingSpinner />;
   } else {
     if (session?.user?.email) {
       if (!userByEmail?.data?.username) {

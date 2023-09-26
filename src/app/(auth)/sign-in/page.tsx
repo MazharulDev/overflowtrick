@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signIn, useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { redirect } from "next/navigation";
+import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 
 const SignInPage = () => {
   const { data: session } = useSession();
@@ -12,7 +13,7 @@ const SignInPage = () => {
     session?.user?.email
   );
   if (isLoading || isFetching) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   } else {
     if (session?.user?.email) {
       if (data?.data?.username) {

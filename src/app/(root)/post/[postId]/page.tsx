@@ -2,6 +2,7 @@
 import CommentCardPage from "@/app/components/card/CommentCard";
 import CreateCommentPage from "@/app/components/card/CreateComment";
 import TimeAgo from "@/app/components/dateAdd/TimeAgo";
+import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 import {
   useGetPostByIdQuery,
   useToggleLikeMutation,
@@ -122,7 +123,7 @@ const singlePostPage = ({
           </div>
         </div>
       ) : (
-        <p className="text-heading4-medium text-white">Loading...</p>
+        <LoadingSpinner />
       )}
       <CreateCommentPage postId={params?.postId} />
       <div className="mt-5">

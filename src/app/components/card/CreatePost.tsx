@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import LoadingSpinner from "../loadingSpinner/Loading";
 
 interface iPost {
   post: string;
@@ -19,7 +20,7 @@ const CreatePost = () => {
     session?.user?.email
   );
   if (isLoading || isFetching) {
-    return <p className="text-white text-heading3-bold">Loading...</p>;
+    return <LoadingSpinner />;
   }
   const [val, setVal] = useState("");
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -54,7 +55,7 @@ const CreatePost = () => {
         {session?.user && (
           <Image
             className="rounded-full col-span-1"
-            src={session?.user?.image as string}
+            src={data?.data?.image as string}
             width={50}
             height={50}
             alt="profile pic"
@@ -67,7 +68,7 @@ const CreatePost = () => {
             onChange={onChange}
             rows={1}
             className="outline-none bg-dark-1 text-white col-span-4 w-full mt-5 resize-none"
-            placeholder={`What's on your mind, ${session?.user?.name}?`}
+            placeholder={`What's on your mind, ${data?.data?.name}?`}
           ></textarea>
         )}
       </div>

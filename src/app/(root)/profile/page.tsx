@@ -1,5 +1,6 @@
 "use client";
 import PostCard from "@/app/components/card/PostCard";
+import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 
 import { useSession } from "next-auth/react";
@@ -32,7 +33,7 @@ const ProfilePage = () => {
             </div>
           </div>
         ) : (
-          <p className="text-white text-heading2-bold">Loading...</p>
+          <LoadingSpinner />
         )}
         <Link
           href="/profile/edit"

@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 import {
   useGetSingleUserQuery,
   useUpdateUserMutation,
@@ -76,7 +77,7 @@ const profileEditPage = () => {
             </div>
           </div>
         ) : (
-          <p className="text-white text-heading2-bold">Loading...</p>
+          <LoadingSpinner />
         )}
         <div>
           <input

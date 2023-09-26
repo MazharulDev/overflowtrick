@@ -1,5 +1,6 @@
 "use client";
 import PostCard from "@/app/components/card/PostCard";
+import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 import { useGetUserByUsernameQuery } from "@/redux/user/userApi";
 import Image from "next/image";
 import { ReactNode } from "react";
@@ -32,7 +33,7 @@ const DynamicUserProfile = ({
             </div>
           </div>
         ) : (
-          <p className="text-white text-heading2-bold">Loading...</p>
+          <LoadingSpinner />
         )}
       </div>
       {/* <p className="text-white mt-8">Mern stack Developer</p> */}
