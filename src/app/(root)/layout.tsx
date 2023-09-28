@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Overflowtrick",
-  description: "A Next.js 13 Meta overflowtrick application",
+  description: "Overflowtrick Social application",
 };
 
 export default function RootLayout({

@@ -1,13 +1,11 @@
 "use client";
-import { useGetSearchPostQuery } from "@/redux/post/postApi";
+
 import Image from "next/image";
 import { useState } from "react";
 
-const Searchbar = () => {
+const Searchbar = ({ setResult }: any) => {
   const [text, setText] = useState("");
-  const [result, setResult] = useState<string | null>(null);
-  const { data: searchResult } = useGetSearchPostQuery(result);
-  console.log(searchResult);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setResult(text);
@@ -25,7 +23,7 @@ const Searchbar = () => {
         <input
           id="text"
           onChange={(e) => setText(e.target.value)}
-          placeholder="Search post"
+          placeholder="Search people"
           className="flex h-10 w-full rounded-md px-3 py-2 text-sm bg-dark-3 outline-none text-white"
         />
       </form>

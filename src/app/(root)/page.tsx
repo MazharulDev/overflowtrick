@@ -5,7 +5,6 @@ import CreatePost from "../components/card/CreatePost";
 import { useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { redirect } from "next/navigation";
-import { useGetAllPostQuery } from "@/redux/post/postApi";
 import LoadingSpinner from "../components/loadingSpinner/Loading";
 
 export default function Home() {

@@ -23,8 +23,9 @@ const RightSidebar = () => {
         </div>
       </div>
       <div>
-        <h2 className="text-slate-600">
-          Copyright &copy; 2023 overflowtrick <br /> Developed By{" "}
+        <h2 className="text-slate-600 text-small-regular">
+          Copyright &copy; {new Date().getFullYear()} overflowtrick <br />{" "}
+          Developed By{" "}
           <a
             className="text-green-700 hover:underline"
             href="https://mdmazharulislam-dev.web.app/"

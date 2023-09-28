@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import Searchbar from "./Searchbar";
+// import Searchbar from "./Searchbar";
 import { signOut, useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { AiOutlineLogout } from "react-icons/ai";
@@ -16,9 +16,9 @@ function Topbar() {
       <Link href="/" className="flex items-center gap-4">
         <Image src="/assets/logo.svg" alt="logo" width={28} height={28} />
       </Link>
-      <Link href="/post-find" className="mx-4 md:ml-0 hidden md:block">
+      {/* <div className="mx-4 md:ml-0 hidden md:block">
         <Searchbar />
-      </Link>
+      </div> */}
       <div className="flex items-center gap-1">
         {/* ------------------------- */}
         <Link
