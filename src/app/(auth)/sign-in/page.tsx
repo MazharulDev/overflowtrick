@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
-// import { FaGithub } from "react-icons/fa";
+import { BsGoogle } from "react-icons/bs";
+import { HiOutlineMail } from "react-icons/hi";
 import { signIn, useSession } from "next-auth/react";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { redirect } from "next/navigation";
 import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
+import Link from "next/link";
 
 const SignInPage = () => {
   const { data: session } = useSession();
@@ -42,20 +43,24 @@ const SignInPage = () => {
             <p>To continue to Overflowtrick</p>
           </div>
           <div
-            onClick={() =>
-              signIn("google", {
-                // callbackUrl: "http://localhost:3000",
-              })
-            }
+            onClick={() => signIn("google")}
             className="mt-10 flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100 "
           >
-            <FcGoogle className="text-heading3-bold" />
+            <BsGoogle className="text-heading3-bold" />
             <button>Continue with Google</button>
           </div>
-          {/* <div className="mt-3 flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100">
-            <FaGithub className="text-heading3-bold" />
-            <button>Continue with Github</button>
-          </div> */}
+          <div className="flex justify-center items-center">
+            <span className="border w-full"></span>
+            <h2 className="m-2">OR</h2>
+            <span className="border w-full"></span>
+          </div>
+          <Link
+            href="/signup-with-email"
+            className=" flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100 "
+          >
+            <HiOutlineMail className="text-heading3-bold" />
+            <button>Continue with Email</button>
+          </Link>
         </div>
       </div>
     </div>

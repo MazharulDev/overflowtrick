@@ -15,6 +15,7 @@ const UserCardPage = ({ person }: any) => {
           height={45}
           alt="profile pic"
         />
+        {/* <img className="w-10 h-10 rounded-full" src={person?.image} alt="" /> */}
         <div className="text-white">
           <p>{person?.name}</p>
           <p>@{person?.username}</p>

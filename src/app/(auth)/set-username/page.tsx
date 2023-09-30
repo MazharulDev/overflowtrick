@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation";
 import { usePostUserMutation } from "@/redux/user/userApi";
 type Inputs = {
   username: string;
+  password: string;
 };
 
 const SetUsernamePage = () => {
   const router = useRouter();
   const [postUser] = usePostUserMutation();
   const { data: session } = useSession();
+
   const {
     register,
     handleSubmit,
@@ -24,7 +26,8 @@ const SetUsernamePage = () => {
         name: session?.user?.name,
         email: session?.user?.email,
         image: session?.user?.image,
-        username: data?.username,
+        username: data?.username?.toLocaleLowerCase()?.replace(/\s/g, ""),
+        password: data?.username?.toLocaleLowerCase()?.replace(/\s/g, ""),
       },
     };
     if (session?.user) {
