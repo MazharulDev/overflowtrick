@@ -5,11 +5,13 @@ import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { usePostUserMutation } from "@/redux/user/userApi";
+import { useState } from "react";
 type Inputs = {
   username: string;
 };
 
 const SetUsernamePage = () => {
+  const [showError, setShowError] = useState<string>("");
   const router = useRouter();
   const [postUser] = usePostUserMutation();
   const { data: session } = useSession();
@@ -19,18 +21,26 @@ const SetUsernamePage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const options = {
-      data: {
-        name: session?.user?.name,
-        email: session?.user?.email,
-        image: session?.user?.image,
-        username: data?.username?.toLocaleLowerCase()?.replace(/\s/g, ""),
-      },
-    };
-    if (session?.user) {
-      postUser(options);
-      router.push("/");
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const options = {
+        data: {
+          name: session?.user?.name,
+          email: session?.user?.email,
+          image: session?.user?.image,
+          username: data?.username?.toLocaleLowerCase()?.replace(/\s/g, ""),
+        },
+      };
+      if (session?.user) {
+        const res: any = await postUser(options);
+        if (res?.data?.success === true) {
+          router.push("/");
+        } else {
+          setShowError(res?.error?.data?.message);
+        }
+      }
+    } catch (error) {
+      console.error("Someting went wrong!");
     }
   };
 
@@ -60,6 +70,7 @@ const SetUsernamePage = () => {
                 placeholder="username"
               />
             </div>
+            <p className="text-red-500 font-bold">{showError}</p>
             <div className="mt-5 flex justify-end items-center">
               <input
                 type="submit"

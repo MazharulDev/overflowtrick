@@ -43,7 +43,12 @@ const ProfilePage = () => {
           <button>Edit</button>
         </Link>
       </div>
-      {/* <p className="text-white mt-8">Mern stack Developer</p> */}
+      {data?.data?.bio ? (
+        <p className="text-white mt-8">{data?.data?.bio}</p>
+      ) : (
+        ""
+      )}
+
       <p className="border border-slate-800 mt-12"></p>
       <h3 className="text-white text-heading3-bold mt-5 mb-10">Recent Post</h3>
       <div className="mt-5">

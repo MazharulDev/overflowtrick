@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 type Inputs = {
   name: string;
   username: string;
+  bio: string;
 };
 
 const profileEditPage = () => {
@@ -29,14 +30,21 @@ const profileEditPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data): void => {
-    const userData = {
-      name: data.name,
-      username: data.username,
-    };
-    updateUser({ userId, userData });
-    toast.success("Updated profile successfully");
-    router.push("/profile");
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const userData = {
+        name: data.name,
+        username: data.username,
+        bio: data.bio,
+      };
+      const res: any = await updateUser({ userId, userData });
+      if (res?.data?.success === true) {
+        toast.success("Updated profile successfully");
+        router.push("/profile");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,9 +79,6 @@ const profileEditPage = () => {
                   className="flex h-10 w-full rounded-sm px-3 mt-2 py-2 text-sm bg-dark-3 outline-none text-slate-400 pl-6"
                 />
               </div>
-
-              {/* <h2 className="text-heading3-bold">{data?.data?.name}</h2> */}
-              {/* <p className="text-slate-400">@{data?.data?.username}</p> */}
             </div>
           </div>
         ) : (
@@ -87,6 +92,13 @@ const profileEditPage = () => {
           />
         </div>
       </div>
+      <input
+        {...register("bio")}
+        id="text"
+        placeholder="Write you bio"
+        defaultValue={data?.data?.bio}
+        className="flex h-10 w-full rounded-sm px-3 py-2 text-sm bg-dark-3 outline-none text-white mt-8"
+      />
     </form>
   );
 };
