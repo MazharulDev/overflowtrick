@@ -63,7 +63,9 @@ const PostActionPage = ({ data }: any) => {
           ""
         )}
       </div>
-      <RiShareForward2Fill />
+      <div className="cursor-pointer">
+        <RiShareForward2Fill />
+      </div>
     </div>
   );
 };

@@ -7,7 +7,12 @@ import { redirect } from "next/navigation";
 import LoadingSpinner from "@/app/components/loadingSpinner/Loading";
 
 const SignInPage = () => {
+  const handleLoginWithGoogle = () => {
+    signIn("google");
+  };
+
   const { data: session } = useSession();
+
   const { data, isLoading, isFetching } = useGetSingleUserQuery(
     session?.user?.email
   );
@@ -41,7 +46,7 @@ const SignInPage = () => {
             <p>To continue to Overflowtrick</p>
           </div>
           <div
-            onClick={() => signIn("google")}
+            onClick={() => handleLoginWithGoogle()}
             className="mt-10 flex justify-start items-center gap-3 p-3 border border-gray-300 hover:bg-dark-3 cursor-pointer rounded-lg duration-100 "
           >
             <BsGoogle className="text-heading3-bold" />

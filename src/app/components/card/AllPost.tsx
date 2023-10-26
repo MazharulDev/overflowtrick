@@ -58,9 +58,15 @@ const AllPost = () => {
       ) : (
         <p>No post found</p>
       )}
-      <div>
-        <Pagination page={page} setPage={setPage} length={data?.meta?.total} />
-      </div>
+      {data?.data?.length > 19 && (
+        <div>
+          <Pagination
+            page={page}
+            setPage={setPage}
+            length={data?.meta?.total}
+          />
+        </div>
+      )}
     </div>
   );
 };
