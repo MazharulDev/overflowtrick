@@ -21,6 +21,11 @@ function Topbar() {
       </div> */}
       <div className="flex items-center gap-1">
         {/* ------------------------- */}
+        {data?.data?.role === "admin" && (
+          <Link className="text-white border rounded-md p-2" href="dashboard">
+            Dashboard
+          </Link>
+        )}
         <Link
           href="/profile"
           className="lg:block hover:bg-slate-900 p-2 rounded-md cursor-pointer"
