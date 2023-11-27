@@ -1,7 +1,9 @@
+import ShowingAllCard from "@/app/components/dashboard/DashboardHome/ShowingAllCard";
+
 const DashboardHome = () => {
   return (
     <div>
-      <h2 className="">Dashboard home page</h2>
+      <ShowingAllCard />
     </div>
   );
 };

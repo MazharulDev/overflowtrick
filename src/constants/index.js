@@ -46,12 +46,12 @@ export const communityTabs = [
 export const dashboardSidebarLinks = [
   {
     imgURL: "/assets/users.svg",
-    route: "/dashboard",
-    label: "User",
+    route: "/dashboard/users",
+    label: "User Management",
   },
   {
     imgURL: "/assets/post.svg",
     route: "/dashboard/post",
-    label: "Post",
+    label: "Post Management",
   },
 ];
