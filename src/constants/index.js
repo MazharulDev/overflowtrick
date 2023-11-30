@@ -46,7 +46,7 @@ export const communityTabs = [
 export const dashboardSidebarLinks = [
   {
     imgURL: "/assets/users.svg",
-    route: "/dashboard/users",
+    route: "/dashboard/user-management",
     label: "User Management",
   },
   {
