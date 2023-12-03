@@ -1,7 +1,7 @@
 const PostManagementPage = () => {
   return (
     <div>
-      <h2>This is post management page </h2>
+      <h2 className="text-heading1-bold text-white">Post Management </h2>
     </div>
   );
 };
