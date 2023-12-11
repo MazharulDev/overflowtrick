@@ -40,6 +40,13 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ["updateProfile"],
     }),
+    deleteUserById: builder.mutation({
+      query: ({ id }) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["updateProfile"],
+    }),
   }),
 });
 
@@ -51,4 +58,5 @@ export const {
   useGetCommnetNotificationQuery,
   useUpdateUserMutation,
   useGetSearchUserQuery,
+  useDeleteUserByIdMutation,
 } = userApi;

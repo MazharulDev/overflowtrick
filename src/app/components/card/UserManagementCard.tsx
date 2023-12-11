@@ -1,7 +1,14 @@
+"use client";
+import { useDeleteUserByIdMutation } from "@/redux/user/userApi";
 import Image from "next/image";
 import Link from "next/link";
 
 const UserManagementCard = ({ person }: any) => {
+  const [deleteUserById] = useDeleteUserByIdMutation();
+  const handleDeleteUser = (id: string) => {
+    // deleteUserById(id);
+    console.log(id);
+  };
   return (
     <Link
       href={`/profile/${person?.username}`}
@@ -43,7 +50,10 @@ const UserManagementCard = ({ person }: any) => {
             )}
           </div>
           <div>
-            <button className="text-white px-2 bg-red-500 rounded-md hover:bg-red-700">
+            <button
+              onClick={() => handleDeleteUser(person?._id)}
+              className="text-white px-2 bg-red-500 rounded-md hover:bg-red-700"
+            >
               Remove
             </button>
           </div>
