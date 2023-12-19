@@ -11,7 +11,7 @@ const UserManagement = () => {
       <h2 className="text-heading1-bold text-white">User management </h2>
       <div className="mt-7 flex w-full flex-col gap-8">
         {users?.data?.map((user: IUser) => (
-          <UserManagementCard person={user} />
+          <UserManagementCard person={user} key={user._id} />
         ))}
       </div>
     </div>

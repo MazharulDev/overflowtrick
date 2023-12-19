@@ -1,19 +1,14 @@
 "use client";
 import { useDeleteUserByIdMutation } from "@/redux/user/userApi";
 import Image from "next/image";
-import Link from "next/link";
 
 const UserManagementCard = ({ person }: any) => {
   const [deleteUserById] = useDeleteUserByIdMutation();
   const handleDeleteUser = (id: string) => {
-    // deleteUserById(id);
-    console.log(id);
+    deleteUserById({ id });
   };
   return (
-    <Link
-      href={`/profile/${person?.username}`}
-      className="hover:bg-slate-800 p-2 rounded-md cursor-pointer"
-    >
+    <div className="hover:bg-slate-800 p-2 rounded-md cursor-pointer">
       <div className="flex justify-between items-center">
         <div className="flex justify-start items-center gap-5">
           <Image
@@ -59,7 +54,7 @@ const UserManagementCard = ({ person }: any) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
