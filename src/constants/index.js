@@ -49,9 +49,9 @@ export const dashboardSidebarLinks = [
     route: "/dashboard/user-management",
     label: "User Management",
   },
-  {
-    imgURL: "/assets/post.svg",
-    route: "/dashboard/post-management",
-    label: "Post Management",
-  },
+  // {
+  //   imgURL: "/assets/post.svg",
+  //   route: "/dashboard/post-management",
+  //   label: "Post Management",
+  // },
 ];

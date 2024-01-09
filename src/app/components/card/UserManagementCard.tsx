@@ -37,9 +37,9 @@ const UserManagementCard = ({ person }: any) => {
               <div>
                 <button
                   disabled
-                  className="text-white px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500  rounded-md"
+                  className="text-white px-2 bg-gradient-to-r bg-gray-400 rounded-md"
                 >
-                  Admin
+                  Already Admin
                 </button>
               </div>
             )}
