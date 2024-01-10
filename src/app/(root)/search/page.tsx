@@ -1,5 +1,5 @@
 "use client";
-import SearchUserPage from "@/app/components/UI/SearchUser";
+import SearchUserPage from "@/app/components/card/SearchUser";
 import Searchbar from "@/app/components/shared/Searchbar";
 import { useGetSearchUserQuery } from "@/redux/user/userApi";
 import React, { useState } from "react";

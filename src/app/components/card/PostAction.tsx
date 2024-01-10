@@ -1,5 +1,4 @@
 "use client";
-import { IPost } from "@/interfaces/post";
 import { useToggleLikeMutation } from "@/redux/post/postApi";
 import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { useSession } from "next-auth/react";

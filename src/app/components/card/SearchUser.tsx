@@ -1,5 +1,5 @@
 import { IUser } from "@/interfaces/author";
-import UserCardPage from "../card/UserCard";
+import UserCardPage from "./UserCard";
 
 const SearchUserPage = ({ data }: any) => {
   return (
