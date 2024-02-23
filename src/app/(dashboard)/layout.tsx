@@ -6,11 +6,6 @@ import DashboardTopbar from "../components/dashboard/UI/DashboardTopbar";
 import { Toaster } from "react-hot-toast";
 import DashboardLeftSidebar from "../components/dashboard/UI/DashboardLeftSidebar";
 
-export const metadata = {
-  title: "Dashboard",
-  description: "Overflowtrick dashboard",
-};
-
 export default function DashboardLayout({
   children,
 }: {
