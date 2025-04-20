@@ -6,22 +6,22 @@ import PostActionPage from "./PostAction";
 import TimeAgo from "../dateAdd/TimeAgo";
 import { useState } from "react";
 import Pagination from "../dateAdd/pagination/Pagination";
+import PostSkeleton from "../loader/PostSkeleton";
 
 const AllPost = () => {
   const [page, setPage] = useState<number>(1);
-  const { data } = useGetAllPostQuery(page, {
+  const { data, isLoading } = useGetAllPostQuery(page, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
   return (
     <div className="text-white">
-      {data?.data.length > 0 ? (
+      {isLoading ? (
+        <PostSkeleton />
+      ) : data?.data?.length > 0 ? (
         <>
-          {data?.data?.map((postData: IPost) => (
-            <div
-              key={postData.id}
-              className="mb-5 bg-slate-950 p-5 rounded-2xl"
-            >
+          {data?.data.map((postData: IPost) => (
+            <div key={postData.id} className="mb-5 bg-slate-950 p-5 rounded-2xl">
               <div className="grid grid-cols-12 gap-2">
                 <div className="col-span-1">
                   <Image
@@ -41,9 +41,7 @@ const AllPost = () => {
                       >
                         {postData?.author?.name}
                       </Link>
-                      <p className="text-slate-600">
-                        @{postData?.author?.username}
-                      </p>
+                      <p className="text-slate-600">@{postData?.author?.username}</p>
                       <p>-</p>
                       <TimeAgo createdAt={postData?.createdAt} />
                     </div>
@@ -58,7 +56,8 @@ const AllPost = () => {
       ) : (
         <p>No post found</p>
       )}
-      {data?.data?.length > 19 && (
+      
+      {!isLoading && data?.data?.length > 19 && (
         <div>
           <Pagination
             page={page}
