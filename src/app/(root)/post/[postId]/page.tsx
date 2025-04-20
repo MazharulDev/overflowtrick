@@ -11,7 +11,7 @@ import { useGetSingleUserQuery } from "@/redux/user/userApi";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { AiOutlineComment } from "react-icons/ai";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { RiShareForward2Fill } from "react-icons/ri";
@@ -26,16 +26,36 @@ const singlePostPage = ({
 }) => {
   const { data: session } = useSession();
   const { data: user } = useGetSingleUserQuery(session?.user?.email);
-  const { data: postData } = useGetPostByIdQuery(params?.postId);
+  const { data: postData, refetch } = useGetPostByIdQuery(params?.postId);
   const [toggleLike] = useToggleLikeMutation();
+
+  const [likes, setLikes] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (postData?.data?.like) {
+      setLikes(postData.data.like.map((like: any) => like.id));
+    }
+  }, [postData]);
+
   const handleLike = (postId: string, userId: string) => {
-    toggleLike({ postId, userId });
+    const alreadyLiked = likes.includes(userId);
+
+    if (alreadyLiked) {
+      setLikes((prev) => prev.filter((id) => id !== userId));
+    } else {
+      setLikes((prev) => [...prev, userId]);
+    }
+
+    toggleLike({ postId, userId }).then(() => {
+      refetch(); 
+    });
   };
+
   return (
     <div>
       <h1 className="text-heading3-bold text-white text-left mb-5">Post</h1>
       {postData?.data?.author?.email ? (
-        <div className="mb-5 bg-slate-950 p-5 rounded-2xl ">
+        <div className="mb-5 bg-slate-950 p-5 rounded-2xl">
           <div className="grid grid-cols-12">
             <div className="col-span-1">
               <Image
@@ -62,12 +82,12 @@ const singlePostPage = ({
                   <TimeAgo createdAt={postData?.data?.createdAt} />
                 </div>
               </div>
+
               <p className="mt-3 cursor-pointer">{postData?.data?.text}</p>
+
               <div className="text-white flex justify-start items-center gap-8 mt-4 text-heading4-medium">
                 <div className="flex justify-start items-center gap-1">
-                  {postData?.data?.like?.find(
-                    (e: any) => e?.id === user?.data?.id
-                  ) ? (
+                  {likes.includes(user?.data?._id) ? (
                     <div
                       className="cursor-pointer text-green-500 hover:text-white shadow-lg transform active:scale-75 transition-transform"
                       onClick={() =>
@@ -86,18 +106,8 @@ const singlePostPage = ({
                       <BiLike />
                     </div>
                   )}
-                  <div>
-                    {postData?.data?.like?.length ? (
-                      <p className="text-small-regular">
-                        ({postData?.data?.like?.length})
-                      </p>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+                  <p className="text-small-regular">({likes.length})</p>
                 </div>
-
-                {/* ==================== */}
 
                 <div className="flex justify-start items-center gap-2">
                   {postData?.data?.comments?.length > 0 ? (
@@ -111,12 +121,9 @@ const singlePostPage = ({
                   )}
                   {postData?.data?.comments?.length ? (
                     <p className="text-small-regular">{`(${postData?.data?.comments?.length})`}</p>
-                  ) : (
-                    ""
-                  )}
+                  ) : null}
                 </div>
 
-                {/* ===================== */}
                 <RiShareForward2Fill />
               </div>
             </div>
@@ -125,7 +132,9 @@ const singlePostPage = ({
       ) : (
         <LoadingSpinner />
       )}
+
       <CreateCommentPage postId={params?.postId} />
+
       <div className="mt-5">
         <CommentCardPage comments={postData?.data?.comments} />
       </div>
