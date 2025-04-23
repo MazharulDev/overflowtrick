@@ -68,7 +68,7 @@ const PostActionPage = ({ data }: any) => {
               <BiLike />
             </div>
           )}
-          <p className="text-small-regular">({likes.length})</p>
+          <p className="text-small-regular">{likes?.length>0 &&(likes.length)}</p>
         </div>
 
         {/* Comment */}
@@ -82,7 +82,7 @@ const PostActionPage = ({ data }: any) => {
             <AiOutlineComment />
           </Link>
           {data?.comments?.length ? (
-            <p className="text-small-regular">{`(${data?.comments?.length})`}</p>
+            <p className="text-small-regular">{`${data?.comments?.length}`}</p>
           ) : null}
         </div>
 

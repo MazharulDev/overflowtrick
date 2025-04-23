@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import LoadingSpinner from "../loadingSpinner/Loading";
+import { CiImageOn } from "react-icons/ci";
 
 interface iPost {
   post: string;
@@ -72,7 +73,10 @@ const CreatePost = () => {
           ></textarea>
         )}
       </div>
-      <div className="mt-5 flex justify-end">
+      <div className="mt-5 flex justify-between">
+        <div>
+          <CiImageOn color="white" size={25} className="mt-3 hover:cursor-pointer"/>
+        </div>
         {val.length > 2 ? (
           <button
             onClick={handleSubmit}
